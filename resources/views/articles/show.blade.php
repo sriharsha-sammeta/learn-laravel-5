@@ -9,4 +9,6 @@
     <article>
         {{ $article->body }}
     </article>
+    
+    <p><a href="{{ route('articles.edit',['articles'=>$article->id]) }}">Edit</a></p>
 @stop

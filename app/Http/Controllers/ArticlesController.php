@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateArticleRequest;
+use App\Http\Requests\ArticleRequest;
 
 use Illuminate\Http\Request;
 use Log;
@@ -57,10 +57,10 @@ class ArticlesController extends Controller
 
     /**
      *
-     * @param CreateArticleRequest $request
+     * @param ArticleRequest $request
      * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(CreateArticleRequest $request)
+    public function store(ArticleRequest $request)
     {
 
 //        $this->validate($request, [
@@ -73,6 +73,33 @@ class ArticlesController extends Controller
 
         return redirect('articles');
 
+    }
+
+    /**
+     * @param $id
+     * @return View
+     */
+    public function edit($id)
+    {
+
+        $article = Article::findOrFail($id);
+
+        return view('articles.edit', compact('article'));
+    }
+
+    /**
+     * @param ArticleRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(ArticleRequest $request, $id)
+    {
+
+        $article = Article::findOrFail($id);
+
+        $article->update($request->all());
+
+        return redirect()->route('articles.index');
 
     }
 

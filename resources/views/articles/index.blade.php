@@ -7,7 +7,7 @@
     @foreach($articles as $article)
 
         <article>
-            <h2><a href="{{ route('article_using_id',['article_id'=>$article->id] ) }}"> {{ $article->title }} </a></h2>
+            <h2><a href="{{ route('articles.show',['articles'=>$article->id] ) }}"> {{ $article->title }} </a></h2>
 
             <div class="body">
                 {{ $article->body }}

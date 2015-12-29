@@ -20,7 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'articles',], function () {
+Route::resource('articles','ArticlesController');
+
+/*Route::group(['prefix' => 'articles',], function () {
 
     Route::get('', 'ArticlesController@index');
 
@@ -30,4 +32,14 @@ Route::group(['prefix' => 'articles',], function () {
 
     Route::post('', 'ArticlesController@store');
 
-});
+});*/
+
+/*Route::get('articles', 'ArticlesController@index');
+
+Route::get('articles/create', 'ArticlesController@create');
+
+Route::get('articles/{id}', 'ArticlesController@show')->where(['id' => '[0-9]+'])->name('article_using_id');
+
+Route::post('articles', 'ArticlesController@store');
+
+Route::get('articles/{id}/edit','ArticlesController@edit');*/
