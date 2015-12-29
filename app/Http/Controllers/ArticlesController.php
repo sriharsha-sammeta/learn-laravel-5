@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use Request;
+use App\Http\Requests\CreateArticleRequest;
 
+use Illuminate\Http\Request;
 use Log;
 
+use \Illuminate\View\View;
 use App\Article;
-use App\Http\Requests;
-use Response;
 
+/**
+ * Class ArticlesController
+ * @package App\Http\Controllers
+ */
 class ArticlesController extends Controller
 {
+    /**
+     * @return View
+     */
     public function index()
     {
         $articles = Article::latest('published_at')->published('<=')->get();
@@ -20,6 +26,11 @@ class ArticlesController extends Controller
         return view('articles.index', compact('articles'));
     }
 
+
+    /**
+     * @param $id
+     * @return View
+     */
     public function show($id)
     {
 
@@ -35,31 +46,33 @@ class ArticlesController extends Controller
         return view('articles.show', compact('article'));
     }
 
+    /**
+     * @return View
+     */
     public function create()
     {
         return view('articles.create');
     }
 
 
-    public function store()
+    /**
+     *
+     * @param CreateArticleRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function store(CreateArticleRequest $request)
     {
 
-        $input = Request::all();
-        $validator = \Validator::make(
-            $input,
-            array(
-                'title' => 'required|min:5',
-                'body' => 'required|min:10',
-                'published_at' => 'required|date'
-            )
-        );
+//        $this->validate($request, [
+//            'title' => 'required|min:3|unique:articles,title',
+//            'body' => 'required|min:5',
+//            'published_at' => 'required|date'
+//        ]);
 
-        if ($validator->fails()) {
-            return redirect('articles/create')->withErrors($validator);
-        }
-        Article::create(Request::all());
+        Article::create($request->all());
 
         return redirect('articles');
+
 
     }
 
