@@ -17,6 +17,8 @@ use App\Article;
 class ArticlesController extends Controller
 {
     /**
+     * All articles are displayed
+     *
      * @return View
      */
     public function index()
@@ -28,6 +30,8 @@ class ArticlesController extends Controller
 
 
     /**
+     * show an article with given id
+     *
      * @param $id
      * @return View
      */
@@ -47,6 +51,8 @@ class ArticlesController extends Controller
     }
 
     /**
+     * create a new article using a form
+     *
      * @return View
      */
     public function create()
@@ -56,6 +62,7 @@ class ArticlesController extends Controller
 
 
     /**
+     * store a new article
      *
      * @param ArticleRequest $request
      * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -76,6 +83,8 @@ class ArticlesController extends Controller
     }
 
     /**
+     * form for editing the article
+     *
      * @param $id
      * @return View
      */
@@ -88,6 +97,8 @@ class ArticlesController extends Controller
     }
 
     /**
+     * patch or update an existing article
+     *
      * @param ArticleRequest $request
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
